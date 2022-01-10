@@ -11,6 +11,11 @@ public class TestOwnArrayList {
         ownArray.add("Text3");
         ownArray.add("Text4");
         ownArray.add("Text5");
+        ownArray.add("Text1");
+        ownArray.add("Text2");
+        ownArray.add("Text3");
+        ownArray.add("Text4");
+        ownArray.add("Text5");
 
         System.out.print("Вывод всего массива: ");
         for (String s : ownArray) {

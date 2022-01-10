@@ -11,4 +11,12 @@
         <module>collection</module>
     </modules>
 
+	<properties>
+		<java.version>11</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<junit.jupiter.version>5.8.2</junit.jupiter.version>
+	</properties>
+
 </project>

@@ -1,11 +1,15 @@
 package ownLinkedList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OwnLinkedListTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void add() {
         OwnLinkedList<String> ownList = new OwnLinkedList<>();
         ownList.add("Andersen1");
@@ -18,7 +22,7 @@ class OwnLinkedListTest {
         assertEquals("Andersen4", ownList.get(3));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void delete() {
         OwnLinkedList<String> ownList = new OwnLinkedList<>();
         ownList.add("Andersen");
@@ -26,7 +30,7 @@ class OwnLinkedListTest {
         assertEquals(0, ownList.size());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void get() {
         OwnLinkedList<String> ownList = new OwnLinkedList<>();
         ownList.add("Andersen1");
@@ -39,7 +43,7 @@ class OwnLinkedListTest {
         assertEquals("Andersen4", ownList.get(3));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void size() {
         OwnLinkedList<String> ownList = new OwnLinkedList<>();
         ownList.add("Andersen1");
@@ -49,7 +53,7 @@ class OwnLinkedListTest {
         assertEquals(4, ownList.size());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void update() {
         OwnLinkedList<String> ownList = new OwnLinkedList<>();
         ownList.add("Andersen1");
@@ -59,16 +63,14 @@ class OwnLinkedListTest {
         assertEquals("NewAndersen", ownList.get(1));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void iterator() {
         OwnLinkedList<String> ownList = new OwnLinkedList<>();
         ownList.add("Andersen");
-        ownList.add("Andersen");
-        ownList.add("Andersen");
-        ownList.add("Andersen");
+        Iterator<String> iter = ownList.iterator();
 
-        for (String text : ownList){
-            assertEquals("Andersen", text);
-        }
+        boolean actual = iter.hasNext();
+
+        assertTrue(actual);
     }
 }

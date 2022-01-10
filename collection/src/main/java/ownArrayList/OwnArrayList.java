@@ -2,36 +2,38 @@ package ownArrayList;
 
 import java.util.Iterator;
 
-public class OwnArrayList<E> implements Methods<E> {
+public class OwnArrayList<E> implements MethodForOwnArray<E> {
 
     private E[] values;
+    int countValues = 0;
 
     public OwnArrayList() {
-        values = (E[]) new Object[0];
+        values = (E[]) new Object[10];
     }
 
     @Override
     public void add(E e) {
 
-        try {
+            if(countValues == values.length-1){
+                createNewArr(values.length*2, e);
+            }else{
+                values[countValues] = e;
+                countValues++;
+            }
 
-            E[] tempValues = values;
-            int lengthValues = values.length;
-            values = (E[]) new Object[lengthValues + 1];
-            values[values.length - 1] = e;
-            System.arraycopy(tempValues, 0, values, 0, tempValues.length);
+    }
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
+    public void createNewArr(int newLength, E e) {
+        E[] newArray = (E[]) new Object[newLength];
+        System.arraycopy(values, 0, newArray, 0, values.length);
+        values = newArray;
+        values[countValues] = e;
+        countValues++;
     }
 
     @Override
     public void delete(int index) {
-
-        try {
-
+            countValues--;
             E[] tempValuesPart1 = (E[]) new Object[index];
             System.arraycopy(values, 0, tempValuesPart1, 0, index);
 
@@ -41,11 +43,6 @@ public class OwnArrayList<E> implements Methods<E> {
             values = (E[]) new Object[tempValuesPart1.length + tempValuesPart2.length];
             System.arraycopy(tempValuesPart1, 0, values, 0, tempValuesPart1.length);
             System.arraycopy(tempValuesPart2, 0, values, index, tempValuesPart2.length);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
     }
 
     @Override
@@ -55,7 +52,7 @@ public class OwnArrayList<E> implements Methods<E> {
 
     @Override
     public int size() {
-        return values.length;
+        return countValues;
     }
 
     @Override
@@ -65,6 +62,6 @@ public class OwnArrayList<E> implements Methods<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new OwnArrayIterator<>(values);
+        return new OwnArrayIterator<>(values, countValues);
     }
 }
