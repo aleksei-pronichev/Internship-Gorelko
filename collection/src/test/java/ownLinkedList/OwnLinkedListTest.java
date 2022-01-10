@@ -1,6 +1,5 @@
 package ownLinkedList;
 
-
 import java.util.Iterator;
 
 import org.junit.jupiter.api.Test;
