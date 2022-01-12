@@ -1,11 +1,17 @@
 package ownArrayList;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
-public class OwnArrayList<E> implements MethodForOwnArray<E> {
+public class OwnArrayList<E> implements OwnArray<E> {
+    @Override
+    public String toString() {
+        return Arrays.toString(values);
+    }
 
     private E[] values;
-    int countValues = 0;
+    private int countValues = 0;
 
     public OwnArrayList() {
         values = (E[]) new Object[10];
@@ -14,12 +20,12 @@ public class OwnArrayList<E> implements MethodForOwnArray<E> {
     @Override
     public void add(E e) {
 
-            if(countValues == values.length-1){
-                createNewArr(values.length*2, e);
-            }else{
-                values[countValues] = e;
-                countValues++;
-            }
+        if (countValues == values.length - 1) {
+            createNewArr(values.length * 2, e);
+        } else {
+            values[countValues] = e;
+            countValues++;
+        }
 
     }
 
@@ -33,16 +39,18 @@ public class OwnArrayList<E> implements MethodForOwnArray<E> {
 
     @Override
     public void delete(int index) {
-            countValues--;
-            E[] tempValuesPart1 = (E[]) new Object[index];
-            System.arraycopy(values, 0, tempValuesPart1, 0, index);
 
-            E[] tempValuesPart2 = (E[]) new Object[values.length - (index + 1)];
-            System.arraycopy(values, index + 1, tempValuesPart2, 0, tempValuesPart2.length);
+        if (countValues == index + 1) {
+            values[index] = null;
+        } else {
+            E[] tempValues = values;
+            values = (E[]) new Object[tempValues.length - 1];
+            System.arraycopy(tempValues, 0, values, 0, index);
+            int countForEnter = tempValues.length - index - 1;
+            System.arraycopy(tempValues, index + 1, values, index, countForEnter);
+        }
+        countValues--;
 
-            values = (E[]) new Object[tempValuesPart1.length + tempValuesPart2.length];
-            System.arraycopy(tempValuesPart1, 0, values, 0, tempValuesPart1.length);
-            System.arraycopy(tempValuesPart2, 0, values, index, tempValuesPart2.length);
     }
 
     @Override
@@ -64,4 +72,16 @@ public class OwnArrayList<E> implements MethodForOwnArray<E> {
     public Iterator<E> iterator() {
         return new OwnArrayIterator<>(values, countValues);
     }
+
+    @Override
+    public void printOwnArray(){
+        String input = Arrays.toString(values);
+        Stream<String> stream = Arrays.stream(input.split( "," ));
+        stream
+                .filter(x -> x.indexOf("null")==-1)
+                .map(x -> x.replace("[", "").replace("]", "").replace(" ", ""))
+                .forEach(x -> System.out.print(x + " "));
+
+    }
+
 }

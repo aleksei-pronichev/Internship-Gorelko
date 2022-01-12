@@ -2,7 +2,7 @@ package ownLinkedList;
 
 import java.util.Iterator;
 
-public class OwnLinkedList<E> implements MethodForOwnList<E> {
+public class OwnLinkedList<E> implements OwnList<E> {
 
     private Node<E> firstNode;
     private Node<E> lastNode;
@@ -24,23 +24,23 @@ public class OwnLinkedList<E> implements MethodForOwnList<E> {
 
     public void addFirstValue(E e) {
         Node<E> node1 = new Node<>();
-        node1.prev = null;
-        node1.next = null;
-        node1.current = e;
+        node1.setPrev(null);
+        node1.setNext(null);
+        node1.setCurrent(e);
         this.firstNode = node1;
         this.lastNode = node1;
     }
 
     public void addSecondValue(E e) {
         Node<E> node2 = new Node<>();
-        node2.prev = firstNode;
-        node2.next = null;
-        node2.current = e;
+        node2.setPrev(firstNode);
+        node2.setNext(null);
+        node2.setCurrent(e);
 
         Node<E> node1 = new Node<>();
-        node1.prev = null;
-        node1.next = node2;
-        node1.current = firstNode.current;
+        node1.setPrev(null);
+        node1.setNext(node2);
+        node1.setCurrent(firstNode.getCurrent());
 
         this.firstNode = node1;
         this.lastNode = node2;
@@ -49,11 +49,11 @@ public class OwnLinkedList<E> implements MethodForOwnList<E> {
     public void addMoreTwoValue(E e) {
         Node<E> node1 = lastNode;
         Node<E> node2 = new Node<>();
-        node2.prev = lastNode;
-        node2.next = null;
-        node2.current = e;
+        node2.setPrev(lastNode);
+        node2.setNext(null);
+        node2.setCurrent(e);
         this.lastNode = node2;
-        node1.next = node2;
+        node1.setNext(node2);
     }
 
     @Override
@@ -72,11 +72,11 @@ public class OwnLinkedList<E> implements MethodForOwnList<E> {
 
     public void delForZeroIndex(int index) {
         if (size > 2) {
-            firstNode.next.prev = null;
-            firstNode = firstNode.next;
+            firstNode.getNext().setPrev(null);
+            firstNode = firstNode.getNext();
         } else if (size == 2) {
-            lastNode.next = null;
-            lastNode.prev = null;
+            lastNode.setNext(null);
+            lastNode.setPrev(null);
             firstNode = lastNode;
         } else if (size == 1) {
             firstNode = null;
@@ -86,26 +86,26 @@ public class OwnLinkedList<E> implements MethodForOwnList<E> {
 
     public void delForFirstIndex(int index) {
         if (size == 3) {
-            Node<E> tempNode = firstNode.next.next;
-            tempNode.prev = firstNode;
-            firstNode.next = tempNode;
+            Node<E> tempNode = firstNode.getNext().getNext();
+            tempNode.setPrev(firstNode);
+            firstNode.setNext(tempNode);
         } else if (size == 2) {
-            firstNode.prev = null;
-            firstNode.next = null;
+            firstNode.setPrev(null);
+            firstNode.setNext(null);
             lastNode = firstNode;
         }
     }
 
     public void delForLastIndex(int index) {
         if (index == 2) {
-            lastNode = firstNode.next;
-            lastNode.next = null;
+            lastNode = firstNode.getNext();
+            lastNode.setNext(null);
         } else {
-            Node<E> tempNode = firstNode.next;
+            Node<E> tempNode = firstNode.getNext();
             for (int i = 1; i < index; i++) {
-                tempNode = tempNode.next;
+                tempNode = tempNode.getNext();
             }
-            tempNode.next = null;
+            tempNode.setNext(null);
             lastNode = tempNode;
         }
     }
@@ -115,27 +115,27 @@ public class OwnLinkedList<E> implements MethodForOwnList<E> {
         Node<E> tempNode1 = firstNode;
         Node<E> tempNode2 = firstNode;
         for (int i = 0; i < index; i++) {
-            tempNode = tempNode.next;
-            tempNode1 = tempNode.prev;
-            tempNode2 = tempNode.next;
+            tempNode = tempNode.getNext();
+            tempNode1 = tempNode.getPrev();
+            tempNode2 = tempNode.getNext();
         }
-        tempNode1.next = tempNode2;
-        tempNode2.prev = tempNode1;
+        tempNode1.setNext(tempNode2);
+        tempNode2.setPrev(tempNode1);
     }
 
     @Override
     public E get(int index) {
 
         if (index == 0) {
-            return firstNode.current;
+            return firstNode.getCurrent();
         } else if (index > 0) {
-            Node<E> tempNode = firstNode.next;
+            Node<E> tempNode = firstNode.getNext();
             for (int i = 1; i < index; i++) {
-                tempNode = tempNode.next;
+                tempNode = tempNode.getNext();
             }
-            return tempNode.current;
+            return tempNode.getCurrent();
         }
-        return firstNode.current;
+        return firstNode.getCurrent();
 
     }
 
@@ -148,13 +148,13 @@ public class OwnLinkedList<E> implements MethodForOwnList<E> {
     public void update(int index, E e) {
 
         if (index == 0) {
-            firstNode.current = e;
+            firstNode.setCurrent(e);
         } else {
-            Node<E> tempNode = firstNode.next;
+            Node<E> tempNode = firstNode.getNext();
             for (int i = 1; i < index; i++) {
-                tempNode = tempNode.next;
+                tempNode = tempNode.getNext();
             }
-            tempNode.current = e;
+            tempNode.setCurrent(e);
         }
     }
 

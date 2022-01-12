@@ -2,9 +2,9 @@ package ownLinkedList;
 
 public class Node<E> {
 
-    Node<E> prev;
-    E current;
-    Node<E> next;
+    private Node<E> prev;
+    private E current;
+    private Node<E> next;
 
     public Node() {
     }
