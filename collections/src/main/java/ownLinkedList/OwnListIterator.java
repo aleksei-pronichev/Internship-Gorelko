@@ -19,8 +19,8 @@ public class OwnListIterator<E> implements Iterator<E> {
     @Override
     public E next() {
         if (!hasNext()) throw new NoSuchElementException();
-        E temp = values.current;
-        values = values.next;
+        E temp = values.getCurrent();
+        values = values.getNext();
         return temp;
     }
 }
