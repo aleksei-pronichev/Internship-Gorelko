@@ -10,7 +10,7 @@
 
 	<modules>
 		<module>cache</module>
-	</modules>
+  	</modules>
 
 	<properties>
 		<java.version>11</java.version>
