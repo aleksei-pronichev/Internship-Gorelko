@@ -10,7 +10,6 @@
 
 	<modules>
 		<module>cache</module>
-		<module>collection</module>
   	</modules>
 
 	<properties>
