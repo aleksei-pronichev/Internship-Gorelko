@@ -1,6 +1,5 @@
 package com.cache;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public interface Cache<Key, Value> {
