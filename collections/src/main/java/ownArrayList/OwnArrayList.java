@@ -74,11 +74,11 @@ public class OwnArrayList<E> implements OwnArray<E> {
     }
 
     @Override
-    public void printOwnArray(){
+    public void printOwnArray() {
         String input = Arrays.toString(values);
-        Stream<String> stream = Arrays.stream(input.split( "," ));
+        Stream<String> stream = Stream.of(input.split(","));
         stream
-                .filter(x -> x.indexOf("null")==-1)
+                .filter(x -> x.indexOf("null") == -1)
                 .map(x -> x.replace("[", "").replace("]", "").replace(" ", ""))
                 .forEach(x -> System.out.print(x + " "));
 

@@ -32,28 +32,28 @@ public class OwnLinkedList<E> implements OwnList<E> {
     }
 
     public void addSecondValue(E e) {
-        Node<E> node2 = new Node<>();
-        node2.setPrev(firstNode);
-        node2.setNext(null);
-        node2.setCurrent(e);
+        Node<E> nodeNext = new Node<>();
+        nodeNext.setPrev(firstNode);
+        nodeNext.setNext(null);
+        nodeNext.setCurrent(e);
 
-        Node<E> node1 = new Node<>();
-        node1.setPrev(null);
-        node1.setNext(node2);
-        node1.setCurrent(firstNode.getCurrent());
+        Node<E> nodePrev = new Node<>();
+        nodePrev.setPrev(null);
+        nodePrev.setNext(nodeNext);
+        nodePrev.setCurrent(firstNode.getCurrent());
 
-        this.firstNode = node1;
-        this.lastNode = node2;
+        this.firstNode = nodePrev;
+        this.lastNode = nodeNext;
     }
 
     public void addMoreTwoValue(E e) {
-        Node<E> node1 = lastNode;
-        Node<E> node2 = new Node<>();
-        node2.setPrev(lastNode);
-        node2.setNext(null);
-        node2.setCurrent(e);
-        this.lastNode = node2;
-        node1.setNext(node2);
+        Node<E> nodePrev = lastNode;
+        Node<E> nodeNext = new Node<>();
+        nodeNext.setPrev(lastNode);
+        nodeNext.setNext(null);
+        nodeNext.setCurrent(e);
+        this.lastNode = nodeNext;
+        nodePrev.setNext(nodeNext);
     }
 
     @Override
